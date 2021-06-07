@@ -24,8 +24,10 @@ func main() {
 	check(err)
 }
 
-func openFile(fileName string) error {
-	return open.Run(fileName)
+func createPath() (string, error) {
+	path := fmt.Sprintf("%d/%d", year, month)
+
+	return path, os.MkdirAll(path, 0777)
 }
 
 func createFile(path string) (string, error) {
@@ -43,10 +45,8 @@ func createFile(path string) (string, error) {
 	return fileName, err
 }
 
-func createPath() (string, error) {
-	path := fmt.Sprintf("%d/%d", year, month)
-
-	return path, os.MkdirAll(path, 0777)
+func openFile(fileName string) error {
+	return open.Run(fileName)
 }
 
 func fileNotExists(filename string) bool {
