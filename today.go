@@ -15,13 +15,13 @@ var (
 
 func main() {
 	path, err := createPath()
-	check(err)
+	checkError(err)
 
 	fileName, err := createFile(path)
-	check(err)
+	checkError(err)
 
 	err = openFile(fileName)
-	check(err)
+	checkError(err)
 }
 
 func createPath() (string, error) {
@@ -33,7 +33,7 @@ func createPath() (string, error) {
 func createFile(path string) (string, error) {
 	fileName := fmt.Sprintf("%s/%d.md", path, day)
 	templateContent, err := ioutil.ReadFile("templates/pt.md")
-	check(err)
+	checkError(err)
 
 	fileTemplate :=
 		fmt.Sprintf("# %d/%d/%d", year, month, day) + string(templateContent)
@@ -55,7 +55,7 @@ func fileNotExists(filename string) bool {
 	return os.IsNotExist(err)
 }
 
-func check(err error) {
+func checkError(err error) {
 	if err != nil {
 		panic(err)
 	}
